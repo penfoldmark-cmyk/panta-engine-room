@@ -54,6 +54,9 @@ Publishing always needs a person. The agent can recalculate, retry and diagnose 
 
 ## Working across chats
 
+- Repo: https://github.com/penfoldmark-cmyk/panta-engine-room (branch `main`)
+- Published prototype: https://claude.ai/artifact/KWS4KJC3XyhdkozjRP7M1R
+
 Each chat in the "Operations Module" project owns one area:
 
 1. Spec and IA
