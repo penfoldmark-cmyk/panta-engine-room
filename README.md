@@ -46,16 +46,24 @@ Publishing always needs a person. The agent can recalculate, retry and diagnose 
 
 ## Stack and conventions
 
-- Angular 20, standalone components, signals, zoneless change detection
-- One component per file in `src/app/`; example data in `src/app/data.ts`
-- Global design tokens in `src/styles.css` (Panta dark: blue `#4b8ff0`, teal `#1fb3a3`, green `#3fd18b`, brand gradient as a thin top band)
-- Font: Geist; tabular numbers everywhere
+The prototype is built inside the real PANTA dashboard app, not as a standalone page.
+
+- Location: `PANTA Repo/panta-dashboard-main/panta-dashboard-main/projects/proto/engine-room/` on Mark's laptop (the dashboard repo is not in git)
+- Follow `PANTA-Prototype-Design-System.md` (in the project and in `PANTA Repo`): `pds-*` components, `--pds-*` tokens, Oswald for titles and buttons, Source Sans 3 for labels and values, square corners, dark theme only
+- Mock data in the root-provided `EngineRoomStore` (signals, `simulate…()` methods); no NGXS, no HTTP
+- Navigation: `EngineRoomConfigService` in `projects/proto/index.ts`, registered in `src/app/app.config.ts`; route `/:clientId/engine-room`
+- Strings in `public/i18n/en.json` under `PROTO_ENGINE_ROOM.*` and `NAV.PROTO_*`
+- Check before hand-over: `npx ngc -p tsconfig.app.json --noEmit` and `npx eslint projects/proto`
+- pds-icons glyphs that exist: add, calendar, search, run, save, upload, download, export, copy, close, delete, template, wizard, info, more, notification and a few others. Anything else (calculate, refresh, warning) needs `iconType="material"`
 - Example data only. Never use real client names.
+
+Built so far: Brief (`brief/`), with the day track, item detail, Ask Engine and reject dialogs.
+
+The standalone Angular app in this GitHub repo was the first draft and is superseded.
 
 ## Working across chats
 
-- Repo: https://github.com/penfoldmark-cmyk/panta-engine-room (branch `main`)
-- Published prototype: https://claude.ai/artifact/KWS4KJC3XyhdkozjRP7M1R
+- First draft (superseded, standalone Angular): https://github.com/penfoldmark-cmyk/panta-engine-room and https://claude.ai/artifact/KWS4KJC3XyhdkozjRP7M1R
 
 Each chat in the "Operations Module" project owns one area:
 
@@ -70,14 +78,10 @@ Each chat in the "Operations Module" project owns one area:
 
 Rules:
 
-- Pull `main` before starting. Work on a branch named after the area, for example `area/monitor`.
-- Only change shared files (`styles.css`, `data.ts`, `glyph.ts`, `app.ts`) in the Design system or Integration chats, or say so in the commit message.
-- Build before pushing: `npm ci && npx ng build --output-hashing=none`.
-- The published prototype is one artifact link, republished from the built `main.js` and `styles.css`.
+- Link the chat to Mark's computer and work in `projects/proto/engine-room/` in the dashboard repo.
+- Only change shared files (`engine-room-store.ts`, `engine-room.model.ts`, `engine-room-seed.ts`, `projects/proto/index.ts`) in the Spec or Integration chats, or say so in the hand-over.
+- Type-check and lint before hand-over.
 
 ## Run locally
 
-```
-npm ci
-npx ng serve
-```
+In the dashboard repo: `ng serve --configuration local` (the `dashboard` entry in `PANTA Repo/.claude/launch.json`), then open `/<clientId>/engine-room`. The page uses only the mock store, so it works with either the local shim or the dev gateway login.
