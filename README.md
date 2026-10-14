@@ -63,7 +63,9 @@ The standalone Angular app in this GitHub repo was the first draft and is supers
 
 ## Working across chats
 
-- First draft (superseded, standalone Angular): https://github.com/penfoldmark-cmyk/panta-engine-room and https://claude.ai/artifact/KWS4KJC3XyhdkozjRP7M1R
+- **The prototype link: https://claude.ai/artifact/KWS4KJC3XyhdkozjRP7M1R.** Always republish to this URL; never create a second link.
+- How it is built: a copy of the dashboard with only `EngineRoomConfigService` registered, auth guards removed, hash routing, the service worker disabled, no AG Grid key, relative `i18n/` path; production build with `fonts: false`; then publish `main.js`, `polyfills.js`, chunks, `styles.css`, `css/`, `media/`, `i18n/` and the two logo SVGs alongside a page that mounts `<pt-root>`.
+- First draft (superseded, standalone Angular): https://github.com/penfoldmark-cmyk/panta-engine-room
 
 Each chat in the "Operations Module" project owns one area:
 
